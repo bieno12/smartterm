@@ -3,11 +3,11 @@
 
 #include <iostream>
 
+
+static term::input::InputMode currentTermMode = term::input::InputMode::Cooked;
 #ifndef _WIN32
 #include <termios.h>
 #include <unistd.h>
-
-static struct termios originalTermios;
 
 #else
 #include <windows.h>
@@ -15,7 +15,17 @@ static struct termios originalTermios;
 #endif
 
 void term::input::setInputMode(InputMode mode) {
-#ifndef _WIN32
+    static bool bSavedOriginal = false;
+
+    #ifndef _WIN32
+    static struct termios originalTermios;
+    if (!bSavedOriginal)
+    {
+        tcgetattr(STDIN_FILENO, &originalTermios);
+        currentTermMode = InputMode::Cooked;
+        bSavedOriginal = true;
+    }
+
     if (mode == InputMode::Raw) {
         struct termios rawTermios;
         tcgetattr(STDIN_FILENO, &originalTermios);
@@ -27,6 +37,14 @@ void term::input::setInputMode(InputMode mode) {
     }
 #else
     static DWORD originalConsoleMode = 0;
+
+    if (!bSavedOriginal)
+    {
+        GetConsoleMode(hStdin, &originalConsoleMode);
+        currentTermMode = InputMode::Cooked;
+        bSavedOriginal = true;
+    }
+
     HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
     
     if (mode == InputMode::Raw) {
@@ -37,6 +55,11 @@ void term::input::setInputMode(InputMode mode) {
         SetConsoleMode(hStdin, originalConsoleMode);
     }
 #endif
+    currentTermMode = mode;
+}
+term::input::InputMode term::input::getInputMode()
+{
+    return currentTermMode;
 }
 
 term::input::Key term::input::readkey()

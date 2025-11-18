@@ -1,6 +1,7 @@
 #include "internal.h"
 #include <iostream>
 #include <thread>
+#include "term/term.h"
 using namespace std;
 using namespace term;
 
@@ -35,6 +36,10 @@ void term::clearScreen()
     cout << "\x1b[2J";
 }
 
+void term::clearLine()
+{
+    cout << "\x1b[2K";
+}
 void term::showCursor()
 {
     cout << "\x1b[?25h";

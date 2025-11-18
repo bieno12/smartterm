@@ -15,6 +15,7 @@ enum class InputMode
 };
 
 void setInputMode(InputMode mode);
+InputMode getInputMode();
 
 enum class Key
 {

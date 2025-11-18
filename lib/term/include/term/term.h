@@ -29,6 +29,7 @@ void setForegroundColor(const Color& color);
 void setBackgroundColor(const Color& color);
 void resetColors();
 void clearScreen();
+void clearLine();
 void showCursor();
 void hideCursor();
 void setCursorPosition(unsigned int x,unsigned int y);
