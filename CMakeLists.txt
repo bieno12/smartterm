@@ -17,8 +17,8 @@ add_executable(${PROJECT_NAME} ${SRC_FILES})
 
 add_subdirectory(lib/term)
 add_subdirectory(lib/tui)
-add_subdirectory(task1)
-add_subdirectory(task2)
+add_subdirectory(lib/myutils)
+
 
 target_link_libraries(${PROJECT_NAME} 
     PRIVATE
