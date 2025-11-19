@@ -98,7 +98,7 @@ Demonstrates:
 
 ### Prerequisites
 - CMake 3.10 or higher
-- C++11 compatible compiler
+- C++17 compatible compiler
 - Platform: Windows, Linux, or macOS
 
 ### Build Instructions
@@ -115,18 +115,12 @@ cmake --build build
 ./build/task2/task2
 ```
 
-### Build Options
-
-The project uses CMake for configuration and can generate build files for various generators (Make, Visual Studio, Ninja, etc.).
-
 ## Key Features
 
 - **Cross-Platform**: Works on Windows (native console API), Linux, and macOS (POSIX terminals)
 - **RGB Colors**: True color support using ANSI escape sequences
 - **Event-Driven Architecture**: Keyboard input handling through virtual methods
 - **Composable Components**: Build complex UIs from simple widget components
-- **Non-blocking Input**: Raw mode support for responsive terminal applications
-- **Clean API**: Simple and intuitive interfaces for common UI patterns
 
 ## Architecture
 
@@ -154,43 +148,3 @@ Application
     OS Terminal (Windows Console / POSIX Terminal)
 ```
 
-## Usage Example
-
-```cpp
-#include "tui/menu.h"
-#include "tui/page.h"
-#include "term/input.h"
-
-int main() {
-    // Create a menu
-    Menu mainMenu;
-    mainMenu.addItem("Option 1");
-    mainMenu.addItem("Option 2");
-    mainMenu.addItem("Option 3");
-    
-    // Create a page and add the menu
-    Page page("Main Menu");
-    page.addWidget(&mainMenu);
-    
-    // Handle keyboard input
-    while (true) {
-        KeyCode key = getKeyPress();
-        page.handleKeyPress(key);
-        
-        if (key == KeyCode::ENTER) {
-            // Process selection
-            break;
-        }
-    }
-    
-    return 0;
-}
-```
-
-## License
-
-This project is provided as-is for educational and development purposes.
-
-## Contributing
-
-Contributions are welcome! Please ensure code follows the existing style and includes appropriate examples or tests.
