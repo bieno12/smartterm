@@ -19,6 +19,8 @@ add_subdirectory(lib/term)
 add_subdirectory(lib/tui)
 add_subdirectory(task1)
 add_subdirectory(task2)
+add_subdirectory(task3)
+add_subdirectory(task4)
 
 target_link_libraries(${PROJECT_NAME} 
     PRIVATE
