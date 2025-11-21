@@ -15,7 +15,7 @@ class MainPage : public tui::Page
 public:
     MainPage(Application *application) : Page("Main Menu"), mApplication(application)
     {
-        std::vector<std::string> menuItems = {"New", "Display", "Exit"};
+        std::vector<std::string> menuItems = {"New", "Display", "Save", "Exit"};
 
         mMainMenu = tui::Menu(menuItems, tui::Position{2, 2});
 
@@ -27,6 +27,10 @@ public:
             else if (currentItem == "Display")
             {
                 mApplication->requestPageTransition(Application::ApplicationPage::Display);
+            }
+            else if (currentItem == "Save")
+            {
+                mApplication->requestPageTransition(Application::ApplicationPage::Save);
             }
             else if (currentItem == "Exit")
             {

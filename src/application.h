@@ -14,7 +14,8 @@ public:
         NoPage,
         Main,
         Edit,
-        Display
+        Display,
+        Save
     };
 
     Application();
@@ -25,7 +26,9 @@ public:
 private:
     void doPageTransition();
 
+    bool isBufferEmpty();
 
+    
 private:
     std::shared_ptr<tui::Page> mCurrentPage;
     ApplicationPage mRequestedPage = ApplicationPage::NoPage;

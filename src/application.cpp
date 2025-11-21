@@ -2,6 +2,8 @@
 #include "main_page.h"
 #include "display_page.h"
 #include "edit_page.h"
+#include "save_page.h"
+
 Application::Application() : mCurrentPage(std::make_shared<MainPage>(this))
 {
     mLines = Buffer<Buffer<char>>(5);
@@ -21,6 +23,9 @@ void Application::doPageTransition()
     case ApplicationPage::Display:
         mCurrentPage = std::make_shared<DisplayPage>(this, mLines);
         break;
+    case ApplicationPage::Save:
+        mCurrentPage = std::make_shared<SavePage>(this, mLines);
+        break;
     case ApplicationPage::Edit:
         mCurrentPage = std::make_shared<EditPage>(this, mLines);
         break;
@@ -30,6 +35,10 @@ void Application::doPageTransition()
     mRequestedPage = ApplicationPage::NoPage;
 }
 
+bool Application::isBufferEmpty()
+{
+    return mLines.getSize() > 1 || mLines[0].getSize() > 0;
+}
 
 void Application::requestPageTransition(ApplicationPage page)
 {
