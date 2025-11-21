@@ -2,7 +2,6 @@
 #define MAIN_PAGE_H
 #include <term/tui.h>
 #include <string>
-#include <iostream>
 #include <vector>
 #include "application.h"
 
@@ -23,7 +22,7 @@ public:
         mMainMenu.onItemSelected.connect([this](std::string currentItem, std::string last){
             if(currentItem == "New")
             {
-                mApplication->requestPageTransition(Application::ApplicationPage::Create);
+                mApplication->requestPageTransition(Application::ApplicationPage::Edit);
             }
             else if (currentItem == "Display")
             {

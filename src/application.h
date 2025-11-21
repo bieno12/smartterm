@@ -4,20 +4,8 @@
 #include <vector>
 #include <string>
 #include <term/tui.h>
-#include <memory>
+#include "buffer.h"
 
-typedef struct Employee
-{
-    std::string firstName;
-    std::string lastName;
-    struct Date
-    {
-        int day;
-        int month;
-        int year;
-    } dateOfBirth;
-    std::string position;    
-} Employee;
 
 class Application
 {
@@ -25,8 +13,8 @@ public:
     enum class ApplicationPage {
         NoPage,
         Main,
-        Display,
-        Create
+        Edit,
+        Display
     };
 
     Application();
@@ -37,9 +25,13 @@ public:
 private:
     void doPageTransition();
 
-    std::vector<Employee> mEmployees;
+
+private:
     std::shared_ptr<tui::Page> mCurrentPage;
     ApplicationPage mRequestedPage = ApplicationPage::NoPage;
     bool mRunning = true;
+
+    //buffer manipulation
+    Buffer<Buffer<char>> mLines;
 };
 #endif
