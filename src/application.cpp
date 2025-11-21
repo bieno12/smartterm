@@ -65,6 +65,10 @@ void Application::run()
         {
             requestPageTransition(ApplicationPage::Main);
         }
+        if (keyPressed == input::Key::Esc)
+        {
+            requestExit();
+        }
         else
         {
             mCurrentPage->onKeyPressed(keyPressed);
