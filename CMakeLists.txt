@@ -19,6 +19,8 @@ add_subdirectory(lib/term)
 add_subdirectory(lib/tui)
 add_subdirectory(lib/myutils)
 
+add_subdirectory(swap_task)
+add_subdirectory(2d_array_task)
 
 target_link_libraries(${PROJECT_NAME} 
     PRIVATE
