@@ -15,7 +15,7 @@ public:
     ToggleButton(std::string label, tui::Position position) : mLabel(label), Widget(position) {}
 
     void onKeyPressed(term::input::Key keyPressed) override {
-        if(keyPressed == term::input::Key::Enter)
+        if(keyPressed == term::input::Key::Enter || keyPressed == term::input::Key::Space)
         {
             mValue = !mValue;
             onButtonPressed.emit(mValue);
@@ -30,6 +30,10 @@ public:
         term::resetColors();
     }
 
+    bool getValue()
+    {
+        return mValue;
+    }
 public:
     tui::Signal<bool> onButtonPressed;
 private:
@@ -42,7 +46,7 @@ public:
     Button(std::string label, tui::Position position) : mLabel(label), Widget(position) {}
 
     void onKeyPressed(term::input::Key keyPressed) override {
-        if(keyPressed == term::input::Key::Enter)
+        if(keyPressed == term::input::Key::Enter || keyPressed == term::input::Key::Space)
         {
             onButtonPressed.emit();
         }
@@ -169,7 +173,11 @@ private:
             return ;
         }
 
-        std::ofstream file(filename);
+        std::ofstream file;
+        if(mAppendModeToggleButton.getValue())
+            file.open(filename, std::ios::out | std::ios::app);
+        else   
+            file.open(filename, std::ios::out);
 
         if (!file.is_open())
         {
