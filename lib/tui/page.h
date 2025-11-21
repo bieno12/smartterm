@@ -1,7 +1,7 @@
 #pragma once
 
 #include "widget.h"
-#include <set>
+#include <vector>
 #include <string>
 #include <memory>
 
@@ -10,16 +10,23 @@ namespace tui
 
 class Page : public tui::Widget
 {
+
 protected:
     std::string mTitle;
-    std::set<std::shared_ptr<tui::Widget>> mWidgets;
+    std::vector<tui::Widget *> mWidgets;
+    int32_t mFocusedWidgetIndex = -1;
+    
 public:
+
     Page() = default;
     Page(const std::string& title);
-    void addWidget(const std::shared_ptr<tui::Widget>& widget);
-    void removeWidget(const std::shared_ptr<tui::Widget>& widget);
+    void addWidget(tui::Widget *widget);
+    void removeWidget(tui::Widget *widget);
+    
     void draw() override;
     void onKeyPressed(term::input::Key keyPressed) override;
+    void focusNext();
+
 };
 
 } // namespace tui

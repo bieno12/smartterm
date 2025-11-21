@@ -50,6 +50,38 @@ void term::hideCursor()
     cout << "\x1b[?25l";
 }
 
+void term::getCursorPosition(int &x, int &y)
+{
+    // Ask terminal for cursor position
+    std::cout << "\x1b[6n" << std::flush;
+
+    char ch;
+    std::string response;
+
+    // Read until we get 'R'
+    while (std::cin.get(ch)) {
+        response += ch;
+        if (ch == 'R')
+            break;
+    }
+
+    // Expected: ESC [ rows ; cols R
+    int r, c;
+    if (std::sscanf(response.c_str(), "\x1b[%d;%dR", &r, &c) == 2) {
+        y = r;
+        x = c;
+    } else {
+        y = x = -1; // error
+    }
+}
+void term::getSize(int &cols, int &rows)
+{
+    // Move cursor far bottom-right
+    setCursorPosition(999, 999);
+    getCursorPosition(cols, rows);
+
+}
+
 void term::setCursorPosition(unsigned int x,unsigned int y)
 {
     cout << "\x1b[" << y << ";" << x << "H";

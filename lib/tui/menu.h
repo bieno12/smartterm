@@ -4,6 +4,8 @@
 #include <term/term.h>
 #include <vector>
 #include <string>
+
+#include "term/signal.h"
 #include "widget.h"
 namespace tui
 {
@@ -18,6 +20,10 @@ private:
     term::Color mHoverColor = term::Color::YELLOW;
     term::Color mSelectedColor = term::Color::GREEN;
 public:
+    Signal<std::string, std::string> onItemSelected;
+
+public:
+    Menu();
     Menu(const std::vector<std::string>& items, Position pos = {0,0});
     void moveUp();
     void moveDown();
@@ -27,6 +33,7 @@ public:
     void draw() override;
 
     void onKeyPressed(term::input::Key keyPressed);
+
 };
 
 } // namespace tui

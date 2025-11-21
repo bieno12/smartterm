@@ -33,7 +33,9 @@ void clearLine();
 void showCursor();
 void hideCursor();
 void setCursorPosition(unsigned int x,unsigned int y);
+void getCursorPosition(int &x,int &y);
 
+void getSize(int &cols, int &rows);
 void sleep(uint32_t milliseconds);
 } // namespace term
 

@@ -28,7 +28,6 @@ void term::input::setInputMode(InputMode mode) {
 
     if (mode == InputMode::Raw) {
         struct termios rawTermios;
-        tcgetattr(STDIN_FILENO, &originalTermios);
         rawTermios = originalTermios;
         rawTermios.c_lflag &= ~(ECHO | ICANON);
         tcsetattr(STDIN_FILENO, TCSANOW, &rawTermios);
@@ -48,7 +47,6 @@ void term::input::setInputMode(InputMode mode) {
     HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
     
     if (mode == InputMode::Raw) {
-        GetConsoleMode(hStdin, &originalConsoleMode);
         DWORD rawMode = originalConsoleMode & ~(ENABLE_ECHO_INPUT | ENABLE_LINE_INPUT);
         SetConsoleMode(hStdin, rawMode);
     } else if (mode == InputMode::Cooked) {

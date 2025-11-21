@@ -1,9 +1,12 @@
 #include "menu.h"
 #include <iostream>
 
+tui::Menu::Menu() : mSelectedIndex(-1)
+{
+}
 
-tui::Menu::Menu(const std::vector<std::string> &items, const tui::Position pos) 
-    : Widget(pos), mItems(items), mSelectedIndex(-1), mHoveredIndex(0)
+tui::Menu::Menu(const std::vector<std::string> &items, const tui::Position pos)
+    : Widget(pos), mItems(items), mSelectedIndex(-1), mHoveredIndex(0), onItemSelected()
 {
 }
 
@@ -27,7 +30,12 @@ std::string tui::Menu::getSelectedItem() const {
 
 void tui::Menu::selectHovered()
 {
+    if(mHoveredIndex == mSelectedIndex)
+        return ;
+
+    std::string lastItem = this->getSelectedItem();
     mSelectedIndex = mHoveredIndex;
+    this->onItemSelected.emit(getSelectedItem(), lastItem);
 }
 
 void tui::Menu::deselect()
