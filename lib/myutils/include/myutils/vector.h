@@ -2,13 +2,12 @@
 #define BUFFER_H
 
 #include <cstdint>
-
+#include <stdlib.h>
 namespace myutils
 {
 template<typename T>
 class Vector
 {
-
     public:
     Vector(): mCapacity(0), mSize(0), mData(nullptr)
     {
@@ -130,8 +129,8 @@ class Vector
 
         mData[mSize].~T();
     }
-    uint32_t getSize() { return mSize;}
-    uint32_t getCapacity() {return mCapacity;}
+    uint32_t getSize() const { return mSize;}
+    uint32_t getCapacity() const {return mCapacity;}
 
 
     //buffer manipulation
@@ -163,7 +162,15 @@ class Vector
         }
     }
 
-    T& operator [](int x)
+    void clear()
+    {
+        for(uint32_t i = 0; i < mSize; i++)
+        {
+            mData[i].~T();
+        }
+        mSize = 0;
+    }
+    T& operator [](int x) const
     {
         return mData[x];
     }

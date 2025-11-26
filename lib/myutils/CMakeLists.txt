@@ -3,7 +3,7 @@ add_library(myutils)
 target_sources(myutils
     PRIVATE
     cstring.cpp
-
+    string.cpp
     PUBLIC
     FILE_SET HEADERS
     BASE_DIRS
@@ -11,6 +11,8 @@ target_sources(myutils
     FILES
         include/myutils/cstring.h
         include/myutils/vector.h
+        include/myutils/string.h
+
 )
 
 target_include_directories(myutils
