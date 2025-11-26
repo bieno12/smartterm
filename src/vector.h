@@ -3,24 +3,25 @@
 
 #include <cstdint>
 
-
+namespace myutils
+{
 template<typename T>
-class Buffer
+class Vector
 {
 
     public:
-    Buffer(): mCapacity(0), mSize(0), mData(nullptr)
+    Vector(): mCapacity(0), mSize(0), mData(nullptr)
     {
         reserve(2);
 
     }
-    Buffer(uint32_t capacity) : mCapacity(0), mSize(0), mData(nullptr)
+    Vector(uint32_t capacity) : mCapacity(0), mSize(0), mData(nullptr)
     {
         reserve(capacity);
     }
 
 
-    Buffer(const Buffer &other) : mData(nullptr)
+    Vector(const Vector &other) : mData(nullptr)
     {
         if(mData != nullptr)
             deallocate();
@@ -38,7 +39,7 @@ class Buffer
         
     }
 
-    Buffer(Buffer &&other)
+    Vector(Vector &&other)
     {
         if(mData)
             deallocate();
@@ -52,14 +53,14 @@ class Buffer
         other.mCapacity = 0;
 
     }
-    ~Buffer()
+    ~Vector()
     {
         if(mData != nullptr)
             free(mData);
         mData = nullptr;
     }
 
-    Buffer& operator=(const Buffer& other)
+    Vector& operator=(const Vector& other)
     {
         if(mData)
             deallocate();
@@ -77,7 +78,7 @@ class Buffer
         return *this;
     }
 
-    Buffer& operator=(Buffer&& other)
+    Vector& operator=(Vector&& other)
     {
         if(mData)
             deallocate();
@@ -180,4 +181,6 @@ private:
     uint32_t mCapacity;
     uint32_t mSize;
 };
+
+} // namespace myutils
 #endif
