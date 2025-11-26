@@ -9,64 +9,6 @@
 #include <fstream>
 
 
-class ToggleButton : public tui::Widget
-{
-public:
-    ToggleButton(std::string label, tui::Position position) : mLabel(label), Widget(position) {}
-
-    void onKeyPressed(term::input::Key keyPressed) override {
-        if(keyPressed == term::input::Key::Enter || keyPressed == term::input::Key::Space)
-        {
-            mValue = !mValue;
-            onButtonPressed.emit(mValue);
-        }
-    }
-    
-    void draw() override {
-        term::setBackgroundColor(term::Color::WHITE);
-        term::setForegroundColor(term::Color::BLACK);
-        term::setCursorPosition(mPosition.x, mPosition.y);
-        std::cout << "|" << (mValue ? "#" : " ") << "|" << mLabel;
-        term::resetColors();
-    }
-
-    bool getValue()
-    {
-        return mValue;
-    }
-public:
-    tui::Signal<bool> onButtonPressed;
-private:
-    std::string mLabel;
-    bool mValue;
-};
-class Button : public tui::Widget 
-{
-public:
-    Button(std::string label, tui::Position position) : mLabel(label), Widget(position) {}
-
-    void onKeyPressed(term::input::Key keyPressed) override {
-        if(keyPressed == term::input::Key::Enter || keyPressed == term::input::Key::Space)
-        {
-            onButtonPressed.emit();
-        }
-    }
-    
-    void draw() override {
-        term::setBackgroundColor(term::Color::WHITE);
-        term::setForegroundColor(term::Color::BLACK);
-        term::setCursorPosition(mPosition.x, mPosition.y);
-        std::cout << mLabel;
-        term::resetColors();
-    }
-
-public:
-    tui::Signal<> onButtonPressed;
-private:
-    std::string mLabel;
-
-};
-
 
 
 class SavePage : public tui::Page
@@ -174,9 +116,9 @@ private:
 
     tui::InputField mFilenameField;
 
-    Button mSaveButton;
-    Button mBackButton;
-    ToggleButton mAppendModeToggleButton;
+    tui::Button mSaveButton;
+    tui::Button mBackButton;
+    tui::ToggleButton mAppendModeToggleButton;
     std::string mStatus;
 };
 #endif
