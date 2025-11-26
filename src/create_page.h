@@ -44,7 +44,7 @@ public:
     void onKeyPressed(term::input::Key keyPressed) override {
         if (keyPressed == term::input::Key::Enter)
         {
-
+            resetValue();
             readInput();
         }
     }
