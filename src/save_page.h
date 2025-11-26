@@ -67,53 +67,7 @@ private:
 
 };
 
-class InputField : public tui::Widget 
-{
-public:
-    InputField(std::string prompt, tui::Position position) : Widget(position)
-    {
-        mPrompt = prompt;
-    }
-    void onKeyPressed(term::input::Key keyPressed) override {
-        if (keyPressed == term::input::Key::Enter)
-        {
 
-            readInput();
-        }
-    }
-    
-    void draw() override {
-        term::setCursorPosition(mPosition.x, mPosition.y);
-        std::cout << mPrompt << mValue;
-    }
-    std::string getValue() {
-        return mValue;
-    }
-    void resetValue() {
-        term::setCursorPosition(mPosition.x, mPosition.y);
-        term::clearLine();
-        mValue = "";
-        draw();
-    }
-private:
-        void readInput()
-        {
-
-            auto originalMode = term::input::getInputMode();
-            term::input::setInputMode(term::input::InputMode::Cooked);
-            term::setCursorPosition(mPosition.x + mPrompt.size() + 1, mPosition.y);
-            term::showCursor();
-            std::getline(std::cin, mValue);
-
-            term::input::setInputMode(originalMode);
-            term::hideCursor();
-
-        }
-private:
-    std::string mPrompt;
-    std::string mValue;
-
-};
 
 class SavePage : public tui::Page
 {
@@ -218,7 +172,7 @@ private:
     Application *mApplication;
     Buffer<Buffer<char>> &mLines;
 
-    InputField mFilenameField;
+    tui::InputField mFilenameField;
 
     Button mSaveButton;
     Button mBackButton;
