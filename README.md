@@ -8,9 +8,9 @@ git clone git@github.com:bieno12/smartterm.git
 cd smartterm
 ```
 
-2. Switch to the lab5 branch
+2. Switch to the la6 branch
 ```bash
-git checkout lab6
+git checkout lab7
 ```
 
 3. Configure and build (out-of-source build recommended)
@@ -22,8 +22,13 @@ cmake -S . -B build
 # build the project
 cmake --build build
 ```
-4. Run smartterm excutable
+4. Run test_string excutable
 ```bash
 cd build
-./smartterm
+./test_string/test_string
+```
+5. Run python_list excutable
+```bash
+cd build
+./python_list/python_list
 ```
