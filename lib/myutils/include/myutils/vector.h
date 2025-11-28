@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <stdlib.h>
+#include <stdexcept>
 namespace myutils
 {
 template<typename T>
@@ -94,6 +95,8 @@ class Vector
 
     void insert(uint32_t index, T c)
     {
+        if(index < 0 || index >= mSize)
+            throw std::out_of_range("Invalid Vector Index");
         if (mSize + 1 >= mCapacity)
             reserve(mCapacity * 1.5 + 1);
         
@@ -120,7 +123,8 @@ class Vector
     }
     void erase(uint32_t index)
     {
-
+        if(index < 0 || index >= mSize)
+            throw std::out_of_range("Invalid Vector Index");
         for (uint32_t i = index; i < mSize - 1; i++)
         {
             mData[i] = mData[i+1];
@@ -170,9 +174,11 @@ class Vector
         }
         mSize = 0;
     }
-    T& operator [](int x) const
+    T& operator [](int index) const
     {
-        return mData[x];
+        if(index < 0 || index >= mSize)
+            throw std::out_of_range("Invalid Vector Index");
+        return mData[index];
     }
 private:
     void deallocate()
