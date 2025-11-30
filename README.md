@@ -27,13 +27,3 @@ cmake --build build
 cd build
 ./test_string/test_string
 ```
-5. Run python_list excutable
-```bash
-cd build
-./python_list/python_list
-```
-6. Run complex excutable
-```bash
-cd build
-./complex/complex
-```
