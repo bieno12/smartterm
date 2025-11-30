@@ -1,4 +1,4 @@
-# Lab6 Text Editor
+# lab 9 String
 
 ## How to build
 
@@ -8,9 +8,9 @@ git clone git@github.com:bieno12/smartterm.git
 cd smartterm
 ```
 
-2. Switch to the la6 branch
+2. Switch to the lab9 branch
 ```bash
-git checkout lab7
+git checkout lab9
 ```
 
 3. Configure and build (out-of-source build recommended)
