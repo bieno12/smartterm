@@ -1,4 +1,4 @@
-# Lab6 Text Editor
+# Lab7 Complex numbers
 
 ## How to build
 
