@@ -20,6 +20,7 @@ add_subdirectory(lib/tui)
 add_subdirectory(lib/myutils)
 add_subdirectory(test_string)
 add_subdirectory(python_list)
+add_subdirectory(complex)
 
 target_link_libraries(${PROJECT_NAME} 
     PRIVATE
