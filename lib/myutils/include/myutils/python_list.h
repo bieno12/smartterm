@@ -75,7 +75,7 @@ public:
     void print()
     {
         std::cout << "[";
-        for(uint32_t i = 0; i < size() - 1; i++)
+        for(int i = 0; i < size() - 1; i++)
             std::cout << mItems[i] << ", ";
         std::cout << mItems[size() - 1] << "]\n";
     }
