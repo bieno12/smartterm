@@ -9,48 +9,58 @@
 
 using namespace std;
 
+bool isInteger(string str)
+{
+    const char * currentChar = str.c_str();
+    if (*currentChar == '-' || *currentChar == '+')
+        currentChar++;
+
+    while(isdigit(*currentChar))
+        currentChar++;    
+    return *currentChar == '\0';
+}
+
+bool isFLoatingNumber(string str)
+{
+    const char * currentChar = str.c_str();
+    if (*currentChar == '-' || *currentChar == '+')
+        currentChar++;
+
+    while(isdigit(*currentChar))
+        currentChar++;    
+
+    if(*currentChar == '.')
+        currentChar++;
+    while(isdigit(*currentChar))
+        currentChar++;    
+
+    return *currentChar == '\0';
+}
+myutils::Any autoConvert(string str)
+{
+    if(isInteger(str))
+        return myutils::Any(std::stol(str));
+    if(isFLoatingNumber(str))
+        return myutils::Any(std::stod(str));
+    return str;
+}
 int main(int, char**){
-    std::any stdAny = std::string("hello");
-    myutils::Any myAny = std::string("hello");
-    // cout << "stdAny is " << stdAny.type().name() << endl;
-    // cout << "myAny is " << myAny.type().name() << endl;
-    // stdAny = std::string("hello there");
-    // myAny = std::string("hello there");
-    // cout << "stdAny is " << stdAny.type().name() << endl;
-    // cout << "myAny is " << myAny.type().name() << endl;
-    // cout << "clearing\n";
-    // stdAny.reset();
-    // myAny.reset();
-    // cout << "stdAny has value:" << stdAny.has_value() << endl;
-    // cout << "myAny has value:" << myAny.hasValue() << endl;
-    // cout << "stdAny type after reset: " << stdAny.type().name() << endl;
-    // cout << "myAny type after reset: " << myAny.type().name() << endl;
-
-    cout << "Testing copy constructors\n";
-    std::any copiedStdAny = stdAny;
-    myutils::Any copiedMyAny = myAny;
-
-    cout << "copiedStdAny has value: " << copiedStdAny.has_value() << endl;
-    cout << "copiedMyAny has value: " << copiedMyAny.hasValue() << endl;
-    cout << "copiedStdAny type: " << copiedStdAny.type().name() << endl;
-    cout << "copiedMyAny type: " << copiedMyAny.type().name() << endl;
-    std::string &value = std::any_cast<std::string&>(stdAny);
-    std::string &myValue = myAny.get<std::string>();
-    cout << "copiedStdAny type: " << value << endl;
-    cout << "copiedMyAny type: " << myValue << endl;
-
-    value += "hello";
-    myValue += "hello";
-    cout << "After modification" << endl;
-    cout << "copiedStdAny type: " << std::any_cast<std::string&>(stdAny) << endl;
-    cout << "copiedMyAny type: " << myAny.get<std::string>() << endl;
-    cout << "myAny :" << myAny << endl;
+ 
     myutils::PythonList list;
+    cout << "Entering Items in list:";
 
-    list.append(12);
-    list.append(std::string("hello world"));
-    cout << "Size of Python List:" << list.size() << endl;
-    cout << std::string("hello") << endl;
-
-    list.print();
+    while (true)
+    {
+        cout << "item:";
+        string input; getline(cin, input);
+        if(input == "")
+            break;
+        myutils::Any item = autoConvert(input);
+        list.append(item);
+    }
+    cout << "Your python list is:\n";
+    for(int i = 0; i < list.size(); i++)
+    {
+        cout << "value: " << list[i] << ", type: " << list[i].type().name() << endl;
+    }
 }
