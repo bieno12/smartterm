@@ -32,3 +32,8 @@ cd build
 cd build
 ./python_list/python_list
 ```
+6. Run complex excutable
+```bash
+cd build
+./complex/complex
+```
