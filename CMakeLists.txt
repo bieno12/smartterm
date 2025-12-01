@@ -18,7 +18,6 @@ add_executable(${PROJECT_NAME} ${SRC_FILES})
 add_subdirectory(lib/term)
 add_subdirectory(lib/tui)
 add_subdirectory(lib/myutils)
-add_subdirectory(complex)
 
 target_link_libraries(${PROJECT_NAME} 
     PRIVATE
