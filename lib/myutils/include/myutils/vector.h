@@ -180,6 +180,15 @@ class Vector
             throw std::out_of_range("Invalid Vector Index");
         return mData[index];
     }
+
+    // iterators
+    typedef T* iterator;
+    typedef const T* const_iterator;
+
+    iterator begin() { return &mData[0]; }
+    const_iterator begin() const { return &mData[0]; }
+    iterator end() { return &mData[0] + getSize(); }
+    const_iterator end() const { return &mData[0] + getSize(); }
 private:
     void deallocate()
     {
