@@ -1,4 +1,4 @@
-# Lab12 GeoShape
+# Lab13 GeoShape
 
 ## How to build
 
@@ -8,9 +8,9 @@ git clone git@github.com:bieno12/smartterm.git
 cd smartterm
 ```
 
-2. Switch to the lab12 branch
+2. Switch to the lab13 branch
 ```bash
-git checkout lab12
+git checkout lab13
 ```
 
 3. Configure and build (out-of-source build recommended)
