@@ -8,14 +8,27 @@ double Complex::getImaginary()
 {
     return mImaginary;
 }
-double Complex::getReal()
-{
-    return mReal;
+void Complex::setReal(double real) {
+    mReal = real;
 }
+
+double Complex::getReal() { return mReal; }
+
 void Complex::setImaginary(double imaginary)
 {
     mImaginary = imaginary;
 }
+
+Complex Complex::operator+(double number)
+{
+    return Complex(mReal + number);
+}
+
+Complex Complex::operator-(double number)
+{
+    return Complex(mReal - number);
+}
+
 
 Complex Complex::operator+(const Complex &other)
 {
@@ -88,6 +101,32 @@ Complex& Complex::operator/=(const Complex &other)
     return *this;
 }
 
+Complex &Complex::operator+=(double number)
+{
+    mReal += number;
+    return *this;
+}
+
+Complex Complex::operator*(double number)
+{
+    return Complex(mReal * number, mImaginary * number);
+}
+Complex Complex::operator/(double number)
+{
+    return Complex(mReal / number, mImaginary / number);
+}
+Complex &Complex::operator*=(double number)
+{
+    mReal *= number;
+    mImaginary *= number;
+    return *this;
+}
+Complex &Complex::operator/=(double number)
+{
+    mReal /= number;
+    mImaginary /= number;
+    return *this;
+}
 bool Complex::operator==(const Complex &other)
 {
     const double eps = 1e-9;
@@ -116,4 +155,9 @@ std::ostream &operator<<(std::ostream &ostream, const Complex &complex) {
     return ostream << " "<< complex.mImaginary << "i";
   }
   return ostream << " + " << complex.mImaginary << "i";
+}
+
+Complex operator""_i(long double img)
+{
+    return Complex(0, (double)img);
 }

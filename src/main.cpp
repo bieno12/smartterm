@@ -30,4 +30,6 @@ int main(int, char**){
 
     bool isNotEqual = (a != b);
     cout << "a != b: " << (isNotEqual ? "true" : "false") << endl;
+
+    cout << "a + 4i: " << (a + 4.0_i) << endl;
 }

@@ -24,18 +24,9 @@ public:
 
     // operator overloading for numeric types
     // Complex - number operator
-    template<typename Type, typename NumericType = std::enable_if_t<std::is_arithmetic_v<Type>, Type>>
-    Complex operator+(NumericType number)
-    {
-        return Complex(mReal + number);
-    }
+    Complex operator+(double number);
     // Complex - number operator
-    template<typename Type, typename NumericType = std::enable_if_t<std::is_arithmetic_v<Type>, Type>>
-    Complex operator-(NumericType number)
-    {
-        return Complex(mReal - number);
-    }
-    
+    Complex operator-(double number);
     // Complex on Complex operators
     Complex operator+(const Complex& other);
     Complex& operator+=(const Complex& other);
@@ -48,51 +39,30 @@ public:
 
 
     // Complex +/- number operator
-    template<typename Type, typename NumericType = std::enable_if_t<std::is_arithmetic_v<Type>, Type>>
-    Complex& operator+=(NumericType number)
-    {
-        mReal += number;
-        return *this;
-    }
-    template<typename Type, typename NumericType = std::enable_if_t<std::is_arithmetic_v<Type>, Type>>
-    Complex& operator-=(NumericType number)
+    Complex& operator+=(double number);
+    Complex& operator-=(double number)
     {
         mReal -= number;
         return *this;
     }
     // Complex mul/div number operators
-    template<typename Type, typename NumericType = std::enable_if_t<std::is_arithmetic_v<Type>, Type>>
-    Complex operator*(NumericType number)
-    {
-        return Complex(mReal * number, mImaginary * number);
-    }
-    template<typename Type, typename NumericType = std::enable_if_t<std::is_arithmetic_v<Type>, Type>>
-    Complex operator/(NumericType number)
-    {
-        return Complex(mReal / number, mImaginary / number);
-    }
-    template<typename Type, typename NumericType = std::enable_if_t<std::is_arithmetic_v<Type>, Type>>
-    Complex& operator*=(NumericType number)
-    {
-        mReal *= number;
-        mImaginary *= number;
-        return *this;
-    }
-    template<typename Type, typename NumericType = std::enable_if_t<std::is_arithmetic_v<Type>, Type>>
-    Complex& operator/=(NumericType number)
-    {
-        mReal /= number;
-        mImaginary /= number;
-        return *this;
-    }
+    Complex operator*(double number);
+    
+    Complex operator/(double number);
+
+    Complex& operator*=(double number);
+    Complex& operator/=(double number);
     
     // Comparasion operators
     bool operator==(const Complex& other);
     bool operator!=(const Complex& other);
     // Printing
     friend std::ostream& operator<<(std::ostream& ostream, const Complex &complex);
+
 private:
     double mReal;
     double mImaginary;
 };
+Complex operator""_i(long double);
+
 #endif
