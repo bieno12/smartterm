@@ -1,4 +1,4 @@
-# Lab11 Picture drawing
+# Lab12 Picture drawing
 
 ## How to build
 
@@ -8,9 +8,9 @@ git clone git@github.com:bieno12/smartterm.git
 cd smartterm
 ```
 
-2. Switch to the lab11 branch
+2. Switch to the lab12 branch
 ```bash
-git checkout lab11
+git checkout lab12
 ```
 
 3. Configure and build (out-of-source build recommended)
