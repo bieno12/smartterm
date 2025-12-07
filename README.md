@@ -1,4 +1,4 @@
-# Lab8 Stack
+# Lab11 Template Stack
 
 ## How to build
 
@@ -8,9 +8,9 @@ git clone git@github.com:bieno12/smartterm.git
 cd smartterm
 ```
 
-2. Switch to the lab8 branch
+2. Switch to the lab11 branch
 ```bash
-git checkout lab8
+git checkout lab11
 ```
 
 3. Configure and build (out-of-source build recommended)
